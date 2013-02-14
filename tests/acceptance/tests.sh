@@ -6,14 +6,14 @@ PYTHON=${PYTHON:-python}
 
 testNormal() {
 	for i in $base/files/*; do
-		$PYTHON $cdiff --color=always $i/in.diff | diff -b $i/out -
+		$PYTHON $cdiff --color=always $i/in.diff | diff -bq $i/out -
 		assertEquals 0 $?
 	done
 }
 
 testSideBySide() {
 	for i in $base/files/*; do
-		$PYTHON $cdiff -s --color=always $i/in.diff | diff -b $i/out.side_by_side -
+		$PYTHON $cdiff -s --color=always $i/in.diff | diff -q $i/out.side_by_side -
 		assertEquals 0 $?
 	done
 }
@@ -21,7 +21,7 @@ testSideBySide() {
 
 testNoColorIsUntouched() {
 	for i in $base/files/*; do
-		$PYTHON $cdiff  $i/in.diff | diff $i/in.diff -ub -
+		$PYTHON $cdiff  $i/in.diff | diff $i/in.diff -uq -
 		assertEquals 0 $?
 	done
 }
